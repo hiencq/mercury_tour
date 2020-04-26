@@ -1,0 +1,44 @@
+package automationFramework;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class MercuryTour_Login_test1 {
+
+	public static void main(String[] args) {
+		
+		
+		String driverExecutablePath = "Your path to driver file geckodriver.exe";
+		System.setProperty("webdriver.gecko.driver", driverExecutablePath);
+		WebDriver driver = new FirefoxDriver(); 
+		
+		//Launch Mercury Tour WebSite
+		String url = "http://newtours.demoaut.com/"; 
+		driver.get(url); 
+		
+		// Declare UI elements
+		WebElement txt_username=driver.findElement(By.xpath("//input[@name='userName']"));
+		WebElement txt_password=driver.findElement(By.xpath("//input[@name='password']"));
+		WebElement btn_signin=driver.findElement(By.xpath("//input[@name='login']"));
+		
+		// Enter usr and pw. Then click Login
+		txt_username.sendKeys("shopeetest");
+		txt_password.sendKeys("Shopee@2020");
+		btn_signin.click();
+		
+		// Check for screen translation
+		String url_expected="http://newtours.demoaut.com/mercuryreservation.php"; 
+		String url_actual= driver.getCurrentUrl();
+		if(url_expected.equalsIgnoreCase(url_actual)) {
+			System.out.println("PASSED"); }
+		else {
+			System.out.println("FAILED"); }
+		
+		//Closing browser 
+		driver.close();
+		
+	}
+
+}
